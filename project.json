@@ -1,0 +1,31 @@
+{
+  "overview": "CyberShield Platform is an enterprise-grade cybersecurity SaaS dashboard with a dark neon aesthetic. Features a premium product UI with real-time threat monitoring, AI-powered vulnerability analysis, scan center with terminal view, threat intelligence, and enterprise-grade reporting — all wrapped in a glassmorphic depth design system with animated micro-interactions.",
+  "features": [
+    "Enterprise dark neon dashboard with System Control Panel (API status, active scans, AI engine, queue)",
+    "Live Activity Feed with real-time scan events and vulnerability alerts",
+    "AI Insight Cards with intelligent security recommendations",
+    "Animated Security Score with circular graph and risk breakdown (Network, Web, API)",
+    "3-panel AI Agent page with target input, AI thinking timeline, and vulnerability output panel",
+    "AI Brain Visual with node-connection attack path visualization",
+    "Scan Center with terminal view, hacker typing animation, and animated pipeline visual",
+    "Unified Threat Intelligence cards with risk severity classification",
+    "Enterprise Report page with executive summary, CVSS scores, and attack path diagram",
+    "Premium depth card system with gradient borders, inner glow, soft shadows, and hover elevation",
+    "Loading skeletons, empty states, and friendly error states throughout",
+    "HTTP outcalls for Gemini AI analysis integration"
+  ],
+  "category": "cybersecurity",
+  "tags": [
+    "cybersecurity",
+    "saas",
+    "dashboard",
+    "enterprise",
+    "threat-intelligence",
+    "ai",
+    "penetration-testing",
+    "dark-theme",
+    "glassmorphism",
+    "real-time"
+  ],
+  "last_updated": "2026-04-10T21:09:59.180Z"
+}

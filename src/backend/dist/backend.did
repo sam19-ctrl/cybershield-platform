@@ -1,0 +1,150 @@
+type Timestamp = int;
+type ThreatResult = 
+ record {
+   entry: opt ThreatEntry;
+   found: bool;
+   relatedThreats: vec ThreatEntry;
+ };
+type ThreatId = nat;
+type ThreatEntryInput = 
+ record {
+   description: text;
+   indicator: text;
+   indicatorType: text;
+   riskLevel: text;
+   source: text;
+ };
+type ThreatEntry = 
+ record {
+   description: text;
+   detectedAt: Timestamp;
+   id: ThreatId;
+   indicator: text;
+   indicatorType: text;
+   riskLevel: text;
+   source: text;
+ };
+type SystemStatus = 
+ record {
+   activeScans: nat;
+   aiEngineStatus: text;
+   apiStatuses: vec APIStatus;
+   queueSize: nat;
+   securityScore: nat;
+ };
+type SubmitContactResult = 
+ variant {
+   err: text;
+   ok: SubmissionId;
+ };
+type SubmitContactInput = 
+ record {
+   company: text;
+   email: text;
+   message: text;
+   name: text;
+ };
+type SubmissionId = nat;
+type ScanId = nat;
+type Scan = 
+ record {
+   completedAt: opt Timestamp;
+   findings: vec Finding;
+   id: ScanId;
+   mode: text;
+   progress: nat;
+   startedAt: Timestamp;
+   status: text;
+   target: text;
+ };
+type Finding = 
+ record {
+   cvssScore: float64;
+   description: text;
+   findingType: text;
+   id: nat;
+   port: opt nat;
+   protocol: opt text;
+   severity: text;
+   title: text;
+ };
+type CreateScanResult = 
+ variant {
+   err: text;
+   ok: Scan;
+ };
+type ContactSubmission = 
+ record {
+   company: text;
+   email: text;
+   id: SubmissionId;
+   message: text;
+   name: text;
+   submittedAt: Timestamp;
+ };
+type AnalysisId = nat;
+type ActivityId = nat;
+type ActivityEventType = 
+ variant {
+   APIHit;
+   ScanComplete;
+   ScanStarted;
+   ThreatDetected;
+   VulnFound;
+ };
+type ActivityEntry = 
+ record {
+   eventType: ActivityEventType;
+   id: ActivityId;
+   message: text;
+   severity: text;
+   timestamp: Timestamp;
+ };
+type APIStatus = 
+ record {
+   lastChecked: Timestamp;
+   name: text;
+   responseTime: nat;
+   status: text;
+ };
+type AIVulnerability = 
+ record {
+   description: text;
+   recommendation: text;
+   severity: text;
+   title: text;
+ };
+type AIAnalysisResult = 
+ variant {
+   err: text;
+   ok: AIAnalysis;
+ };
+type AIAnalysis = 
+ record {
+   completedAt: Timestamp;
+   id: AnalysisId;
+   riskScore: nat;
+   suggestions: vec text;
+   target: text;
+   thinking: text;
+   vulnerabilities: vec AIVulnerability;
+ };
+service : {
+  addActivity: (eventType: ActivityEventType, message: text, severity:
+   text) -> (ActivityEntry);
+  addThreatEntry: (entry: ThreatEntryInput) -> (ThreatEntry);
+  analyzeTarget: (target: text, context: text) -> (AIAnalysisResult);
+  createScan: (target: text, scanMode: text) -> (CreateScanResult);
+  getAnalysis: (id: AnalysisId) -> (opt AIAnalysis) query;
+  getScan: (id: ScanId) -> (opt Scan) query;
+  getSystemStatus: () -> (SystemStatus) query;
+  listActivities: (limit: nat) -> (vec ActivityEntry) query;
+  listAnalyses: () -> (vec AIAnalysis) query;
+  listContactSubmissions: () -> (vec ContactSubmission) query;
+  listScans: () -> (vec Scan) query;
+  listThreats: () -> (vec ThreatEntry) query;
+  lookupThreat: (indicator: text, indicatorType: text) ->
+   (ThreatResult) query;
+  submitContact: (input: SubmitContactInput) -> (SubmitContactResult);
+  updateScanStatus: (id: ScanId, status: text) -> (bool);
+}

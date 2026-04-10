@@ -1,0 +1,215 @@
+// Version: 3.0.0
+type AIAnalysis__804393395 =
+  {
+    completedAt : Timestamp__301639476;
+    id : AnalysisId__627167302;
+    riskScore : Nat;
+    suggestions : [Text];
+    target : Text;
+    thinking : Text;
+    vulnerabilities : [AIVulnerability__924703455]
+  };
+type AIVulnerability__924703455 =
+  {description : Text; recommendation : Text; severity : Text; title : Text};
+type ActivityEntry__497453047 =
+  {
+    eventType : ActivityEventType__364441545;
+    id : ActivityId__326478791;
+    message : Text;
+    severity : Text;
+    timestamp : Timestamp__301639476
+  };
+type ActivityEventType__364441545 =
+  {#APIHit; #ScanComplete; #ScanStarted; #ThreatDetected; #VulnFound};
+type ActivityId__326478791 = Nat;
+type AnalysisId__627167302 = Nat;
+type ContactSubmission__93684224 =
+  {
+    company : Text;
+    email : Text;
+    id : SubmissionId__741433157;
+    message : Text;
+    name : Text;
+    submittedAt : Timestamp__301639476
+  };
+type Finding__580725269 =
+  {
+    cvssScore : Float;
+    description : Text;
+    findingType : Text;
+    id : Nat;
+    port : ?Nat;
+    protocol : ?Text;
+    severity : Text;
+    title : Text
+  };
+type List__415060402<T> = List__790383201<T>;
+type List__790383201<T> =
+  {
+    var blockIndex : Nat__490723111;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__490723111
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type OldContactSubmission__497036255 =
+  {
+    company : Text;
+    email : Text;
+    id : OldSubmissionId__810517043;
+    message : Text;
+    name : Text;
+    submittedAt : OldTimestamp__27916213
+  };
+type OldSubmissionId__810517043 = Nat;
+type OldTimestamp__27916213 = Int;
+type ScanId__198292568 = Nat;
+type Scan__7577365 =
+  {
+    completedAt : ?Timestamp__301639476;
+    findings : [Finding__580725269];
+    id : ScanId__198292568;
+    mode : Text;
+    progress : Nat;
+    startedAt : Timestamp__301639476;
+    status : Text;
+    target : Text
+  };
+type SubmissionId__741433157 = Nat;
+type ThreatEntry__823607635 =
+  {
+    description : Text;
+    detectedAt : Timestamp__301639476;
+    id : ThreatId__378457209;
+    indicator : Text;
+    indicatorType : Text;
+    riskLevel : Text;
+    source : Text
+  };
+type ThreatId__378457209 = Nat;
+type Timestamp__301639476 = Int;
+actor ({
+  stable activities :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ActivityEntry__497453047]];
+      var elementIndex : Nat__490723111
+    };
+  stable activityNextIdCell :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Nat]];
+      var elementIndex : Nat__490723111
+    };
+  stable analyses :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?AIAnalysis__804393395]];
+      var elementIndex : Nat__490723111
+    };
+  stable analysisNextIdCell :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Nat]];
+      var elementIndex : Nat__490723111
+    };
+  in nextIdCell : List__415060402<Nat>;
+  stable queueSizeCell :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Nat]];
+      var elementIndex : Nat__490723111
+    };
+  stable scanNextIdCell :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Nat]];
+      var elementIndex : Nat__490723111
+    };
+  stable scans :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Scan__7577365]];
+      var elementIndex : Nat__490723111
+    };
+  in submissions : List__415060402<OldContactSubmission__497036255>;
+  stable threatNextIdCell :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Nat]];
+      var elementIndex : Nat__490723111
+    };
+  stable threats :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ThreatEntry__823607635]];
+      var elementIndex : Nat__490723111
+    }
+}, {
+  stable activities :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ActivityEntry__497453047]];
+      var elementIndex : Nat__490723111
+    };
+  stable activityNextIdCell :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Nat]];
+      var elementIndex : Nat__490723111
+    };
+  stable analyses :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?AIAnalysis__804393395]];
+      var elementIndex : Nat__490723111
+    };
+  stable analysisNextIdCell :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Nat]];
+      var elementIndex : Nat__490723111
+    };
+  stable contactNextIdCell :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Nat]];
+      var elementIndex : Nat__490723111
+    };
+  stable queueSizeCell :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Nat]];
+      var elementIndex : Nat__490723111
+    };
+  stable scanNextIdCell :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Nat]];
+      var elementIndex : Nat__490723111
+    };
+  stable scans :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Scan__7577365]];
+      var elementIndex : Nat__490723111
+    };
+  stable submissions :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ContactSubmission__93684224]];
+      var elementIndex : Nat__490723111
+    };
+  stable threatNextIdCell :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Nat]];
+      var elementIndex : Nat__490723111
+    };
+  stable threats :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ThreatEntry__823607635]];
+      var elementIndex : Nat__490723111
+    }
+}) ;
